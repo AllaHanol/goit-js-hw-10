@@ -1,3 +1,3 @@
 'use strict';
-import izitoast from "izitoast";
+import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
