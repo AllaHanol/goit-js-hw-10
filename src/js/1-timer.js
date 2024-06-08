@@ -3,17 +3,9 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import { saveToLS, loadFromLS } from './helper.js';
 
 
-// const options = {
-//     enableTime: true,
-//     time_24hr: true,
-//     defaultDate: new Date(),
-//     minuteIncrement: 1,
-//     onClose(selectedDates) {
-//       console.log(selectedDates[0]);
-//     },
-//   };
   
 const refs = {
     datetimePicker:document.querySelector('#datetime-picker'),
@@ -23,24 +15,22 @@ const refs = {
     minutes:document.querySelector('[data-minutes]'),
     seconds:document.querySelector('[data-seconds]'),
 }
-const initTime = Date.now(); 
-intervalId = setInterval( ()=>{
-    const currentTime = Date.now();
-    const diff = initTime-currentTime;
-    const time = convertMs(diff)
-})
+let intervalId;
+refs.startBtn.addEventListener('click', ()=>{
+    const initTime = Date.now(); //catch from input
 
-refs.startBtn.addEventListener('click',()=>{
-   
-setInterval(()=>{
-    const date = Date.now()
-    const currentTime = initTime - date;
+    intervalId = setInterval( ()=>{
+        const currentTime = Date.now();
+        const diff = initTime-currentTime;
+        const time = convertMs(diff);
+        
+});
+setTimeout(()=>{
+    clearInterval(intervalId);
+}, initTime-Date.now ());
 
-    const hours = currentTime.getHours(); 
-    console.log(hours);
-
-    // const minutes = (currentTime - hours).getMinutes();
-    // const seconds = (currentTime - minutes).getSeconds();
+refs.startBtn.disabled = true;
+});
 
     function convertMs(ms) {
         // Number of milliseconds per unit of time
@@ -64,13 +54,16 @@ setInterval(()=>{
       console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
       console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
       console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-      
-
-
-
-
-    
-    
-},1000)
-});
+  
+// },1000);
+// });
+// const options = {
+//     enableTime: true,
+//     time_24hr: true,
+//     defaultDate: new Date(),
+//     minuteIncrement: 1,
+//     onClose(selectedDates) {
+//       console.log(selectedDates[0]);
+//     },
+//   };
 
