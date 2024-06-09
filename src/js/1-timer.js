@@ -4,7 +4,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import '../css/timer.css';
-import '../img/izitoast/bi_x-octagon.png'
+import imageUrl from '../img/izitoast/bi_x-octagon.png'
 
 const refs = {
   datetimePicker: document.querySelector('#datetime-picker'),
@@ -87,7 +87,7 @@ const options = {
             messageLineHeight: '24',
             progressBarColor: '#B51B1B',                   
             backgroundColor: '#EF4040',
-            image: '../img/izitoast/bi_x-octagon.png',
+            iconUrl: imageUrl,
             imageWidth: 24,
            
     })
