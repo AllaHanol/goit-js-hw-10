@@ -78,9 +78,7 @@ const flatpickrOptions = {
       refs.startBtn.classList.remove('button-normal');
       refs.startBtn.disabled = true;
       refs.input.active = true;
-      // refs.startBtn.classList.remove('button-normal');
-      // refs.startBtn.setAttribute('disabled', 'true');
-        
+      
       iziToast.show({
             position: 'topRight',
             title: 'Error',
@@ -103,9 +101,7 @@ const flatpickrOptions = {
         refs.startBtn.disabled = false;
         refs.startBtn.classList.add('button-normal');
         refs.input.activ = false;
-        // refs.startBtn.removeAttribute('disabled', '');
-        // refs.startBtn.classList.add('button-normal');
-    
+        
     }
   },
 };
