@@ -8,16 +8,17 @@ import imageUrl from '../img/izitoast/bi_x-octagon.png'
 
 const refs = {
   datetimePicker: document.querySelector('#datetime-picker'),
+  input: document.querySelector('#datetime-picker'),
   startBtn: document.querySelector('[data-start]'),
   daysEl: document.querySelector('[data-days]'),
   hoursEl: document.querySelector('[data-hours]'),
   minutesEl: document.querySelector('[data-minutes]'),
   secondsEl: document.querySelector('[data-seconds]'),
 };
-// let intervalId;
+
 let initTime;
 
-refs.startBtn.disabled = true;
+// refs.startBtn.disabled = true;
 
 
 refs.startBtn.addEventListener('click', (e) => {
@@ -65,7 +66,7 @@ function validateTime (time){
 
 }
 
-const options = {
+const flatpickrOptions = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -74,8 +75,13 @@ const options = {
     initTime = selectedDates[0];
     
     if (validateTime(initTime)) {
+      refs.startBtn.classList.remove('button-normal');
+      refs.startBtn.disabled = true;
+      refs.input.active = true;
+      // refs.startBtn.classList.remove('button-normal');
+      // refs.startBtn.setAttribute('disabled', 'true');
         
-        iziToast.show({
+      iziToast.show({
             position: 'topRight',
             title: 'Error',
             titleColor: '#fff',
@@ -96,7 +102,11 @@ const options = {
         renderTime(initTime);
         refs.startBtn.disabled = false;
         refs.startBtn.classList.add('button-normal');
+        refs.input.activ = false;
+        // refs.startBtn.removeAttribute('disabled', '');
+        // refs.startBtn.classList.add('button-normal');
+    
     }
   },
 };
-flatpickr('.flatpickr-input', options);
+flatpickr('.flatpickr-input', flatpickrOptions);
