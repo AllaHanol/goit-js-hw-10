@@ -51,4 +51,7 @@
   button:focus {
     background: #6c8cff;
   }
-  
+  .iziToast > .iziToast-close {
+    background: url(../img/izitoast/bi_x-lg.png) no-repeat 50% 50%;
+    background-size: 12px;
+  }
