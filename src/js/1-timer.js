@@ -16,23 +16,32 @@ const refs = {
   secondsEl: document.querySelector('[data-seconds]'),
 };
 
-let initTime;
-
-// refs.startBtn.disabled = true;
-
+let initTime = 0;
 
 refs.startBtn.addEventListener('click', (e) => {
-    console.log(e.target);
   const intervalId = setInterval(() => {
+    // const currentTime = Date.now();
+    const diff = initTime - Date.now(); 
+    const time = convertMs(diff);
+    // const timeObj = getTime(time);
     renderTime(initTime)
-  }, 1000);
-  //скидання інтервалу після проходження
+    // refs.days.textContent = timeObj.days;
+    // refs.hours.textContent = timeObj.hours;
+    // refs.minutes.textContent = timeObj.minutes;
+    // refs.seconds.textContent = timeObj.seconds;
+    
+  }, 1000)
+
+  refs. startBtn.classList.remove('button-normal');
+  refs. startBtn.setAttribute('disabled', 'true');
+  refs.input.setAttribute('disabled', 'true');
   setTimeout(() => {
     clearInterval(intervalId);
+    refs.input.removeAttribute('disabled',);
   }, initTime - Date.now());
-});
-
-
+  
+  
+})
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -61,25 +70,26 @@ function renderTime(time) {
   refs.minutesEl.innerText = String(obj.minutes).padStart(2, '0');
   refs.secondsEl.innerText = String(obj.seconds).padStart(2, '0');
 }
-function validateTime (time){
-    return time <= Date.now()
-
-}
-
-const flatpickrOptions = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    initTime = selectedDates[0];
-    
-    if (validateTime(initTime)) {
-      refs.startBtn.classList.remove('button-normal');
-      refs.startBtn.disabled = true;
-      refs.input.active = true;
       
-      iziToast.show({
+      const flatpickrOptions = {
+        enableTime: true,
+        time_24hr: true,
+        defaultDate: new Date(),
+        minuteIncrement: 1,
+        onClose(selectedDates) {
+          const userDate = selectedDates[0];
+          initTime = userDate.getTime();
+          if (initTime > Date.now()) {
+            refs.startBtn.removeAttribute('disabled', '');
+            refs.startBtn.classList.add('button-normal');
+          } else {
+            iziToast.show(iziToastOptions);
+            refs.startBtn.classList.remove('button-normal');
+            refs.startBtn.setAttribute('disabled', 'true');
+          }
+        },
+      };
+      const iziToastOptions = {
             position: 'topRight',
             title: 'Error',
             titleColor: '#fff',
@@ -93,16 +103,14 @@ const flatpickrOptions = {
             backgroundColor: '#EF4040',
             iconUrl: imageUrl,
             imageWidth: 24,
-           
-    })
-        return
-    } else {
-        renderTime(initTime);
-        refs.startBtn.disabled = false;
-        refs.startBtn.classList.add('button-normal');
-        refs.input.activ = false;
-        
-    }
-  },
-};
-flatpickr('.flatpickr-input', flatpickrOptions);
+            
+    };
+
+flatpickr('#datetime-picker', flatpickrOptions);
+
+
+
+
+
+
+
